@@ -10,8 +10,8 @@ export function ButtonHome({ title, onPress, style }: ButtonProps) {
       onPress={onPress} 
       style={style}
       labelStyle={{ 
-        fontSize: 18, 
-        fontFamily: theme.fonts.bold,
+        fontSize: 20, 
+        fontFamily: theme.fonts.extraBold,
       }} 
     >
       {title}

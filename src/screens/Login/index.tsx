@@ -32,7 +32,7 @@ export default function Login({ navigation }: LoginProps) {
       <Input placeholder="Senha" secureTextEntry />
 
       <ButtonContainer>
-        <ButtonHome title="Fazer Login" onPress={() => console.log("Login")} />
+        <ButtonHome title="Fazer Login" onPress={() => navigation.navigate("AppScreen")} />
       </ButtonContainer>
 
       <RegisterContainer>
