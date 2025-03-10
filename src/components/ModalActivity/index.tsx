@@ -4,14 +4,13 @@ import {
   ModalContainer,
   ModalContent,
   ModalTitle,
-  InputContainer,
-  ActivityInput,
   ButtonsContainer,
   CancelButton,
   CancelButtonText,
   SaveButton,
   SaveButtonText,
 } from "./styles";
+import { Input } from "../Input";
 
 type ActivityModalProps = {
   visible: boolean;
@@ -47,15 +46,12 @@ export default function ActivityModal({
         <ModalContainer>
           <ModalContent>
             <ModalTitle>Nova Atividade</ModalTitle>
-
-            <InputContainer>
-              <ActivityInput
-                placeholder="Nome da atividade"
-                value={activityName}
-                onChangeText={setActivityName}
-                autoFocus={true}
-              />
-            </InputContainer>
+            <Input
+              placeholder="Nome da atividade"
+              value={activityName}
+              onChangeText={setActivityName}
+              autoFocus={true}
+            />
 
             <ButtonsContainer>
               <CancelButton onPress={onClose}>

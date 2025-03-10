@@ -44,7 +44,7 @@ export const CancelButton = styled(TouchableOpacity)`
   align-items: center;
   margin-right: 10px;
   border-radius: 10px;
-  border: 1px solid ${theme.colors.roxoPrincipal};
+  border: 2px solid ${theme.colors.roxoPrincipal};
 `;
 
 export const CancelButtonText = styled(Text)`
@@ -53,18 +53,18 @@ export const CancelButtonText = styled(Text)`
   font-family: ${theme.fonts.bold};
 `;
 
-export const SaveButton = styled(TouchableOpacity)`
+export const DeleteButton = styled(TouchableOpacity)`
   flex: 1;
   height: 50px;
   justify-content: center;
   align-items: center;
   margin-left: 10px;
   border-radius: 10px;
-  background-color: ${theme.colors.roxoPrincipal};
+  background-color: ${theme.colors.vermelhoBotao};
 `;
 
-export const SaveButtonText = styled(Text)`
+export const DeleteButtonText = styled(Text)`
   font-size: 16px;
-  color: white;
+  color: ${theme.colors.background};
   font-family: ${theme.fonts.bold};
 `;

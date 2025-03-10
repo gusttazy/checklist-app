@@ -6,6 +6,7 @@ const theme = {
     texto: "#756e98",
     textoCortado: "#d2d0dc",
     background: "#fffffe",
+    vermelhoBotao: "#FF0000",
   },
   fonts: {
     regular: "Raleway_400Regular",

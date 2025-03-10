@@ -8,16 +8,15 @@ import {
   SearchContainer,
   SearchInput,
   SearchIcon,
-  ActivityCard,
-  ActivityText,
-  AddButton,
-  AddButtonIcon,
   EmptyListContainer,
   EmptyListText,
 } from "./styles";
+import ActivityCard from "../../components/ActivityCard";
+import AddTaskButton from "../../components/AddTaskButton";
 import ActivityModal from "../../components/ModalActivity";
+import DeleteConfirmationModal from "../../components/ModalActivityRemove";
 
-type HomeProps = {
+type AppScreenProps = {
   navigation: any;
 };
 
@@ -26,10 +25,12 @@ type Activity = {
   title: string;
 };
 
-export default function Home({ navigation }: HomeProps) {
+export default function Home({ navigation }: AppScreenProps) {
   const [activities, setActivities] = useState<Activity[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+  const [activityToDelete, setActivityToDelete] = useState<string | null>(null);
 
   const filteredActivities = searchQuery
     ? activities.filter((activity) =>
@@ -65,32 +66,26 @@ export default function Home({ navigation }: HomeProps) {
   };
 
   const handleRemoveActivity = (id: string) => {
-    Alert.alert(
-      "Remover Atividade",
-      "Tem certeza que deseja remover esta atividade?",
-      [
-        {
-          text: "Cancelar",
-          style: "cancel",
-        },
-        {
-          text: "Remover",
-          onPress: () => {
-            setActivities(activities.filter((activity) => activity.id !== id));
-          },
-          style: "destructive",
-        },
-      ]
-    );
+    setActivityToDelete(id);
+    setDeleteModalVisible(true);
+  };
+
+  const confirmRemoveActivity = () => {
+    if (activityToDelete) {
+      setActivities(
+        activities.filter((activity) => activity.id !== activityToDelete)
+      );
+    }
+    setDeleteModalVisible(false);
+    setActivityToDelete(null);
   };
 
   const renderItem = ({ item }: { item: Activity }) => (
     <ActivityCard
+      title={item.title}
       onPress={() => handleActivityPress(item.id)}
       onLongPress={() => handleRemoveActivity(item.id)}
-    >
-      <ActivityText>{item.title}</ActivityText>
-    </ActivityCard>
+    />
   );
 
   const renderEmptyList = () => (
@@ -112,6 +107,7 @@ export default function Home({ navigation }: HomeProps) {
           placeholder="Pesquisar listas"
           value={searchQuery}
           onChangeText={setSearchQuery}
+          placeholderTextColor="#a69fca"
         />
         {searchQuery !== "" && (
           <Feather
@@ -137,14 +133,18 @@ export default function Home({ navigation }: HomeProps) {
         ListEmptyComponent={renderEmptyList}
       />
 
-      <AddButton onPress={handleAddActivity}>
-        <AddButtonIcon name="plus" size={30} />
-      </AddButton>
+      <AddTaskButton onPress={handleAddActivity} />
 
       <ActivityModal
         visible={modalVisible}
         onClose={handleCloseModal}
         onSave={handleSaveActivity}
+      />
+
+      <DeleteConfirmationModal
+        visible={deleteModalVisible}
+        onClose={() => setDeleteModalVisible(false)}
+        onConfirm={confirmRemoveActivity}
       />
     </SafeContainer>
   );

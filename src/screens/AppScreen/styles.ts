@@ -1,5 +1,5 @@
 import styled from "@emotion/native";
-import { SafeAreaView, View, TouchableOpacity, TextInput } from "react-native";
+import { SafeAreaView, View, TextInput } from "react-native";
 import { Text } from "react-native-paper";
 import { Feather } from "@expo/vector-icons";
 import theme from "../../styles/theme";
@@ -41,46 +41,6 @@ export const SearchInput = styled(TextInput)`
   color: ${theme.colors.roxoSecundario};
   font-family: ${theme.fonts.regular};
   font-size: 16px;
-`;
-
-export const ActivityCard = styled(TouchableOpacity)`
-  background-color: #F4F2FF;
-  border-radius: 16px;
-  padding: 24px;
-  margin-bottom: 16px;
-  elevation: 2;
-  shadow-opacity: 0.1;
-  shadow-radius: 4px;
-  shadow-color: #000;
-  shadow-offset: 0px 2px;
-`;
-
-export const ActivityText = styled(Text)`
-  font-size: 25px;
-  color: ${theme.colors.roxoPrincipal};
-  font-family: ${theme.fonts.bold};
-  text-align: center;
-`;
-
-export const AddButton = styled(TouchableOpacity)`
-  position: absolute;
-  bottom: 30px;
-  right: 30px;
-  width: 60px;
-  height: 60px;
-  border-radius: 30px;
-  background-color: ${theme.colors.roxoPrincipal};
-  justify-content: center;
-  align-items: center;
-  elevation: 5;
-  shadow-opacity: 0.3;
-  shadow-radius: 5px;
-  shadow-color: #000;
-  shadow-offset: 0px 3px;
-`;
-
-export const AddButtonIcon = styled(Feather)`
-  color: white;
 `;
 
 export const EmptyListContainer = styled(View)`
