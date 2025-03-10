@@ -35,6 +35,7 @@ export const ButtonsContainer = styled(View)`
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
+  margin-top: 10px;
 `;
 
 export const CancelButton = styled(TouchableOpacity)`

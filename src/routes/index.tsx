@@ -25,7 +25,6 @@ export type RootStackParamList = {
   AppScreen: undefined;
 };
 
-// Definições de tipos para as props do cardStyleInterpolator
 type LayoutsType = {
   screen: {
     width: number;
@@ -44,13 +43,11 @@ type AnimationProgressType = {
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-// Mantenha o SplashScreen visível enquanto preparamos recursos
 SplashScreen.preventAutoHideAsync();
 
 const Routes = () => {
   const [isReady, setIsReady] = useState(false);
 
-  // Função para pré-carregar recursos (fontes, imagens)
   const loadResourcesAsync = async () => {
     try {
       // Pré-carregue fontes
@@ -63,10 +60,7 @@ const Routes = () => {
       });
 
       // Pré-carregue imagens
-      await Asset.loadAsync([
-        require("../assets/images/login.png"),
-        // Adicione outras imagens aqui
-      ]);
+      await Asset.loadAsync([require("../assets/images/login.png")]);
     } catch (error) {
       console.warn(error);
     } finally {
@@ -94,27 +88,18 @@ const Routes = () => {
     );
   }
 
+  // Transição de fade para todas as telas
   const customTransition = {
     cardStyleInterpolator: ({
       current,
-      layouts,
     }: {
       current: AnimationProgressType;
-      layouts: LayoutsType;
     }) => {
       return {
         cardStyle: {
-          transform: [
-            {
-              translateX: current.progress.interpolate({
-                inputRange: [0, 1],
-                outputRange: [layouts.screen.width, 0],
-              }),
-            },
-          ],
           opacity: current.progress.interpolate({
-            inputRange: [0, 0.5, 1],
-            outputRange: [0, 0.7, 1],
+            inputRange: [0, 1],
+            outputRange: [0, 1],
           }),
         },
         overlayStyle: {
@@ -127,10 +112,8 @@ const Routes = () => {
     },
     headerStyleInterpolator: ({
       current,
-      next,
     }: {
       current: AnimationProgressType;
-      next?: AnimationProgressType;
     }) => {
       return {
         leftButtonStyle: {
@@ -153,7 +136,7 @@ const Routes = () => {
         screenOptions={{
           headerShown: false,
           gestureEnabled: true,
-          animation: "fade_from_bottom",
+          animation: "fade_from_bottom", // Usando a transição fade
           animationDuration: 300,
           ...customTransition,
           contentStyle: {
@@ -173,8 +156,7 @@ const Routes = () => {
           name="Login"
           component={Login}
           options={{
-            gestureDirection: "horizontal",
-            animation: "slide_from_right",
+            animation: "fade",
             animationDuration: 300,
           }}
         />
@@ -182,8 +164,7 @@ const Routes = () => {
           name="Register"
           component={Register}
           options={{
-            gestureDirection: "horizontal",
-            animation: "slide_from_right",
+            animation: "fade",
             animationDuration: 300,
           }}
         />
@@ -191,8 +172,7 @@ const Routes = () => {
           name="AppScreen"
           component={AppScreen}
           options={{
-            gestureDirection: "horizontal",
-            animation: "slide_from_bottom",
+            animation: "fade",
             animationDuration: 350,
           }}
         />
